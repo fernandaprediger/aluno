@@ -12,7 +12,7 @@ package modelo;
 public class Aluno {
     private int codigo;
     private String nome;
-    private String endereco;
+    private String sobrenome;
 
     public int getCodigo() {
         return codigo;
@@ -30,17 +30,18 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     @Override
     public String toString() {
-        return "Aluno{" + "nome=" + nome + '}';
+        return "Aluno{" + "codigo=" + codigo + '}';
     }
+
     
 }
