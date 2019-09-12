@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Aluno;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,6 +42,29 @@ public class DaoAluno {
             JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
+        }
+    }
+      public static List<Aluno> consultar() {
+        List<Aluno> resultados = new ArrayList<>();
+        //editar o SQL conforme a entidade
+        String sql = "SELECT codigo, nome, sobrenome FROM aluno";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Aluno objeto = new Aluno();
+                //definir um set para cada atributo da entidade, cuidado com o tipo
+                objeto.setCodigo(rs.getInt("codigo"));
+                objeto.setNome(rs.getString("nome"));
+                objeto.setSobrenome(rs.getString("sobrenome"));
+                
+                resultados.add(objeto);//não mexa nesse, ele adiciona o objeto na lista
+            }
+            return resultados;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return null;
         }
     }
 }
